@@ -21,6 +21,7 @@ const DB =
 
 io.on("connection", socket => {
   console.log("a user connected");
+  console.log("new update");
   socket.on("createGame", async ({ name, roomName }) => {
     console.log(name);
     try {
@@ -66,7 +67,7 @@ io.on("connection", socket => {
   socket.on("joinRoom", async ({ name, roomName }) => {
     const query = { roomName: roomName };
     let rooms = [];
-    console.log("new update");
+
     let room = await Room.findOne(query);
     rooms.push(room);
     try {
