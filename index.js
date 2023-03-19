@@ -66,7 +66,7 @@ io.on("connection", socket => {
   socket.on("joinRoom", async ({ name, roomName }) => {
     const query = { roomName: roomName };
     let rooms = [];
-
+    console.log("new update");
     let room = await Room.findOne(query);
     rooms.push(room);
     try {
@@ -87,6 +87,7 @@ io.on("connection", socket => {
           room.players.push(player);
           room.isJoin = false;
           room = await room.save();
+
           io.to(roomId).emit("joinRoomSuccess", room);
           io.to(roomId).emit("updatePlayers", room.players);
           io.to(roomId).emit("updateRoom", room);
